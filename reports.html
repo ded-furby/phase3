@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Reports | Chicken Jockey Coordination System</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="dashboard.css">
+    <link rel="stylesheet" href="themes.css">
+    <link rel="stylesheet" href="reports.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="theme-loader.js"></script>
+</head>
+<body>
+<div class="app-container">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <div class="logo">
+            <img src="logo.png" alt="CJCS Logo">
+        </div>
+        <nav class="sidebar-nav">
+            <button class="nav-item" data-target="dashboard.html">MISSIONS</button>
+            <button class="nav-item" data-target="units.html">UNITS</button>
+            <button class="nav-item" data-target="tracking.html">TRACKING</button>
+            <button class="nav-item" data-target="messaging.html">COMMS</button>
+            <button class="nav-item active">REPORTS</button>
+            <button class="nav-item" data-target="settings.html">SETTINGS</button>
+        </nav>
+    </aside>
+    <!-- Main Content -->
+    <main class="main-content">
+        <header class="topbar">
+            <h1 class="app-title">REPORTS DASHBOARD</h1>
+            <div class="user-profile" id="user-profile">
+                <span id="username-display">USER</span>
+                <div class="user-icon">
+                    <svg viewBox="0 0 24 24" width="24" height="24">
+                        <circle cx="12" cy="8" r="4" fill="currentColor"/>
+                        <path d="M4 20c0-4.4 3.6-8 8-8s8 3.6 8 8" fill="currentColor"/>
+                    </svg>
+                </div>
+                
+                <!-- User Profile Dropdown -->
+                <div class="user-dropdown" id="user-dropdown">
+                    <div class="user-dropdown-header">
+                        <h3 id="user-fullname">User Profile</h3>
+                        <p id="user-role">Role: User</p>
+                    </div>
+                    <div class="user-dropdown-content">
+                        <div class="user-info-item">
+                            <div class="user-info-label">Username:</div>
+                            <div class="user-info-value" id="dropdown-username"></div>
+                        </div>
+                        <div class="user-info-item">
+                            <div class="user-info-label">Email:</div>
+                            <div class="user-info-value" id="dropdown-email"></div>
+                        </div>
+                    </div>
+                    <div class="user-dropdown-footer">
+                        <button class="logout-btn" id="logout-btn">Logout</button>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <div class="content-section report-section">
+            <div class="section-header">
+                <h2>Report Summary</h2>
+            </div>
+            <div class="report-filters">
+                <select id="report-mission-type">
+                    <option value="all">Mission Type</option>
+                    <option value="reconnaissance">Reconnaissance</option>
+                    <option value="patrol">Patrol</option>
+                    <option value="exploration">Exploration</option>
+                    <option value="surveillance">Surveillance</option>
+                    <option value="investigation">Investigation</option>
+                </select>
+                <select id="report-date-range">
+                    <option value="all">Date Range</option>
+                    <option value="7">Last 7 Days</option>
+                    <option value="30">Last 30 Days</option>
+                    <option value="90">Last 90 Days</option>
+                </select>
+            </div>
+            
+            <!-- Summary Cards -->
+            <div class="report-summary-cards">
+                <div class="report-card">
+                    <div class="card-label">Total Missions</div>
+                    <div class="card-value" id="total-missions">0</div>
+                </div>
+                <div class="report-card">
+                    <div class="card-label">Avg Duration</div>
+                    <div class="card-value" id="avg-duration">0 hr 0 min</div>
+                </div>
+                <div class="report-card">
+                    <div class="card-label">Delayed Missions</div>
+                    <div class="card-value" id="delayed-missions">0</div>
+                </div>
+            </div>
+            
+            <!-- Mission List -->
+            <div class="report-missions-container">
+                <div class="report-missions-header">
+                    <h3>Mission List</h3>
+                    <select id="report-mission-select">
+                        <option value="">Select a mission for detailed report</option>
+                    </select>
+                </div>
+                <div class="report-table-container">
+                    <table class="report-table">
+                        <thead>
+                            <tr>
+                                <th>Mission ID</th>
+                                <th>Name</th>
+                                <th>Date</th>
+                                <th>Duration</th>
+                                <th>Type</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="missions-table-body">
+                            <!-- Mission rows will be populated by JS -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            
+            <!-- Mission Detail Report -->
+            <div class="mission-detail-report" id="mission-detail-report" style="display: none;">
+                <div class="detail-report-header">
+                    <h3>Mission Detail Report</h3>
+                    <button class="btn-back-to-list" id="back-to-list-btn">Back to Mission List</button>
+                </div>
+                <div class="detail-report-content">
+                    <div class="detail-report-section">
+                        <div class="detail-title">
+                            <span id="detail-mission-id">#1138</span>
+                            <h2 id="detail-mission-name">Mission Name</h2>
+                        </div>
+                        <div class="mission-type-badge" id="detail-mission-type">
+                            <span class="mission-type-indicator recon"></span>
+                            <span id="detail-type-text">Recon</span>
+                        </div>
+                        <div class="mission-status-badge" id="detail-mission-status">
+                            ACTIVE
+                        </div>
+                    </div>
+                    
+                    <div class="detail-report-section">
+                        <h4>Mission Details</h4>
+                        <div class="detail-grid">
+                            <div class="detail-row">
+                                <div class="detail-label">Date:</div>
+                                <div class="detail-value" id="detail-date">05/15/2025</div>
+                            </div>
+                            <div class="detail-row">
+                                <div class="detail-label">Start Time:</div>
+                                <div class="detail-value" id="detail-start-time">08:00 AM</div>
+                            </div>
+                            <div class="detail-row">
+                                <div class="detail-label">End Time:</div>
+                                <div class="detail-value" id="detail-end-time">12:00 PM</div>
+                            </div>
+                            <div class="detail-row">
+                                <div class="detail-label">Duration:</div>
+                                <div class="detail-value" id="detail-duration">4 hours</div>
+                            </div>
+                            <div class="detail-row">
+                                <div class="detail-label">Assigned Units:</div>
+                                <div class="detail-value" id="detail-units">Alpha Squad, Bravo Team</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="detail-report-section">
+                        <h4>Mission Description</h4>
+                        <p id="detail-description">No description available.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Chart Container -->
+            <div class="report-chart-container">
+                <div class="chart-title">Mission Duration</div>
+                <canvas id="mission-duration-chart" width="600" height="220"></canvas>
+            </div>
+            
+            <!-- Report Actions -->
+            <div class="report-actions">
+                <button class="btn-report" id="download-pdf">PDF</button>
+                <button class="btn-report" id="download-csv">CSV</button>
+            </div>
+        </div>
+    </main>
+</div>
+<script src="reports.js"></script>
+<script src="user-profile.js"></script>
+</body>
+</html>

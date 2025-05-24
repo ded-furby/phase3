@@ -1,0 +1,578 @@
+/* Theme Definitions for Chicken Jockey Coordination System */
+
+/* CSS Variables and Color Themes */
+:root {
+    /* Color palette */
+    --primary-dark: #121212;
+    --secondary-dark: #1e1e1e;
+    --tertiary-dark: #2d2d2d;
+    --accent-pink: #ff69b4;
+    --accent-purple: #9370db;
+    --accent-blue: #5a9bd5;
+    --accent-teal: #4dd0e1;
+    --text-light: #ffffff;
+    --text-muted: #a0a0a0;
+    --border-dark: #333333;
+    --danger: #ff4136;
+    --success: #2ecc40;
+    --warning: #ffdc00;
+    --primary-light: #ffffff;
+    --secondary-light: #f8f8f8;
+    --tertiary-light: #f0f0f0;
+    --text-dark: #111111;
+    --text-muted-light: #555555;
+    --border-light: #dddddd;
+    
+    /* Light Theme Default Variables - will be overridden by [data-theme=dark] below */
+    --bg-color: var(--primary-light);
+    --card-bg: var(--secondary-light);
+    --card-bg-alt: var(--tertiary-light);
+    --text-color: var(--text-dark);
+    --text-secondary: var(--text-muted-light);
+    --border-color: var(--border-light);
+    --input-bg: white;
+    --hover-bg: rgba(0, 0, 0, 0.03);
+    --tracking-color: #6a4ca7;
+    --inactive-color: var(--text-muted-light);
+    --active-color: #3a7cbd;
+    --sidebar-bg: var(--secondary-light);
+    --toggle-bg: var(--tertiary-light);
+    --accent-color: #3a7cbd;
+    --accent-hover: #2a6bad;
+    --accent-muted: rgba(58, 124, 189, 0.5);
+    --success-bg: rgba(46, 204, 64, 0.1);
+    --success-text: #1a7e29;
+    --warning-bg: rgba(255, 220, 0, 0.1);
+    --warning-text: #b49a00;
+    --danger-bg: rgba(255, 65, 54, 0.1);
+    --danger-text: #d32f22;
+    --card-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    
+    /* Common for both themes */
+    --success-color: var(--success);
+    --danger-color: var(--danger);
+    --warning-color: var(--warning);
+    --transition-speed: 0.3s;
+}
+
+/* Dark Theme Variables */
+[data-theme="dark"] {
+    --bg-color: var(--primary-dark);
+    --card-bg: var(--secondary-dark);
+    --card-bg-alt: var(--tertiary-dark);
+    --text-color: var(--text-light);
+    --text-secondary: var(--text-muted);
+    --border-color: var(--border-dark);
+    --input-bg: var(--tertiary-dark);
+    --hover-bg: rgba(255, 255, 255, 0.05);
+    --tracking-color: var(--accent-pink);
+    --inactive-color: var(--text-muted);
+    --active-color: var(--accent-pink);
+    --sidebar-bg: var(--secondary-dark);
+    --toggle-bg: #444;
+    --accent-color: var(--accent-pink);
+    --accent-hover: #ff4aa0;
+    --accent-muted: #ff69b480;
+    --success-bg: rgba(46, 204, 64, 0.2);
+    --success-text: var(--success);
+    --warning-bg: rgba(255, 220, 0, 0.2);
+    --warning-text: var(--warning);
+    --danger-bg: rgba(255, 65, 54, 0.2);
+    --danger-text: var(--danger);
+}
+
+/* Light theme specific enhancements */
+[data-theme="light"] {
+    /* Base colors */
+    --bg-color: #ffffff;
+    --card-bg: #f8f8f8;
+    --card-bg-alt: #f0f0f0;
+    --sidebar-bg: #f0f4f8;
+    --text-color: #111111;
+    
+    /* Enhance buttons */
+    .btn-save, .btn-create, .action-btn {
+        background: linear-gradient(to bottom, #4285f4, #3367d6);
+        color: white;
+        box-shadow: 0 2px 6px rgba(66, 133, 244, 0.3);
+        border-radius: 4px;
+        border: none;
+        transition: all 0.2s ease;
+    }
+    
+    .btn-save:hover, .btn-create:hover, .action-btn:hover {
+        background: linear-gradient(to bottom, #5294ff, #4285f4);
+        box-shadow: 0 4px 8px rgba(66, 133, 244, 0.4);
+        transform: translateY(-1px);
+    }
+    
+    /* Enhance cards and panels */
+    .card, .panel, .content-section, .settings-panel {
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
+        border: 1px solid #e6e6e6;
+        background-color: #ffffff;
+        border-radius: 6px;
+    }
+    
+    /* Enhance sidebar */
+    .sidebar {
+        background: linear-gradient(to bottom, #f0f4f8, #e6edf5);
+        box-shadow: 1px 0 10px rgba(0, 0, 0, 0.06);
+        border-right: 1px solid #e0e6ed;
+    }
+    
+    .sidebar .nav-item {
+        color: #333333;
+        font-weight: 500;
+        margin: 4px 0;
+        border-radius: 4px;
+        transition: all 0.2s ease;
+    }
+    
+    .sidebar .nav-item:hover {
+        background-color: rgba(66, 133, 244, 0.08);
+        color: #4285f4;
+    }
+    
+    .sidebar .nav-item.active {
+        background: linear-gradient(to right, #4285f4, #5294ff);
+        color: white;
+        box-shadow: 0 2px 6px rgba(66, 133, 244, 0.3);
+    }
+    
+    /* Logo styling */
+    .logo {
+        background-color: #4285f4;
+        color: white;
+        border-radius: 50%;
+        font-weight: 600;
+        box-shadow: 0 2px 6px rgba(66, 133, 244, 0.3);
+    }
+    
+    /* Enhance table styling */
+    .mission-table {
+        border-collapse: separate;
+        border-spacing: 0;
+        border-radius: 6px;
+        overflow: hidden;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    }
+    
+    .mission-table th {
+        background: linear-gradient(to bottom, #f0f4f8, #e6edf5);
+        color: #333333;
+        font-weight: 600;
+        padding: 12px 16px;
+        border-bottom: 2px solid #e0e6ed;
+    }
+    
+    .mission-table tr:nth-child(even) {
+        background-color: #f8fafd;
+    }
+    
+    .mission-table tr:nth-child(odd) {
+        background-color: #ffffff;
+    }
+    
+    .mission-table td {
+        color: #333333;
+        border-bottom: 1px solid #edf2f7;
+        padding: 10px 16px;
+    }
+    
+    /* Status badges */
+    .status-badge {
+        font-weight: 500;
+        padding: 4px 10px;
+        border-radius: 12px;
+        font-size: 0.85rem;
+    }
+    
+    .status-badge.active {
+        background-color: rgba(46, 204, 64, 0.15);
+        color: #1a7e29;
+    }
+    
+    .status-badge.in-progress {
+        background-color: rgba(66, 133, 244, 0.15);
+        color: #3367d6;
+    }
+    
+    .status-badge.completed {
+        background-color: rgba(156, 39, 176, 0.15);
+        color: #7b1fa2;
+    }
+    
+    /* Enhance form controls */
+    input, select, textarea {
+        border: 1px solid #d9e2ec;
+        background-color: white;
+        color: #333333;
+        border-radius: 4px;
+        padding: 8px 12px;
+        transition: all 0.2s ease;
+    }
+    
+    input:focus, select:focus, textarea:focus {
+        border-color: #4285f4;
+        box-shadow: 0 0 0 3px rgba(66, 133, 244, 0.2);
+        outline: none;
+    }
+    
+    /* Enhance topbar */
+    .topbar {
+        background: linear-gradient(to right, #ffffff, #f8fafd);
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        border-bottom: 1px solid #e0e6ed;
+        padding: 12px 24px;
+    }
+    
+    .app-title {
+        color: #333333;
+        font-weight: 600;
+        letter-spacing: 0.5px;
+    }
+    
+    /* User profile */
+    .user-profile {
+        color: #333333;
+        background-color: rgba(66, 133, 244, 0.08);
+        border-radius: 20px;
+        padding: 4px 12px;
+        transition: all 0.2s ease;
+    }
+    
+    .user-profile:hover {
+        background-color: rgba(66, 133, 244, 0.15);
+    }
+    
+    .user-dropdown {
+        background-color: white;
+        border: 1px solid #e0e6ed;
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+    }
+    
+    .user-dropdown-header {
+        border-bottom: 1px solid #edf2f7;
+        background: linear-gradient(to right, #f0f4f8, #e6edf5);
+        border-radius: 8px 8px 0 0;
+        padding: 12px 16px;
+    }
+    
+    /* Settings panels */
+    .settings-nav-item {
+        color: #333333;
+        background-color: #f0f4f8;
+        border: 1px solid #e0e6ed;
+        border-radius: 4px;
+        font-weight: 500;
+        transition: all 0.2s ease;
+    }
+    
+    .settings-nav-item:hover {
+        background-color: #e6edf5;
+    }
+    
+    .settings-nav-item.active {
+        background: linear-gradient(to right, #4285f4, #5294ff);
+        color: white;
+        border-color: #4285f4;
+        box-shadow: 0 2px 6px rgba(66, 133, 244, 0.3);
+    }
+    
+    .settings-panel h3 {
+        color: #333333;
+        font-weight: 600;
+        border-bottom: 2px solid #edf2f7;
+        padding-bottom: 10px;
+    }
+    
+    .setting-category h4 {
+        color: #4285f4;
+        font-weight: 600;
+        border-bottom: 1px solid #edf2f7;
+        padding-bottom: 8px;
+    }
+    
+    .setting-item label {
+        color: #333333;
+        font-weight: 500;
+    }
+    
+    .setting-help {
+        color: #666666;
+    }
+    
+    /* Mission cards */
+    .mission-card {
+        border: 1px solid #e0e6ed;
+        background-color: white;
+        border-radius: 6px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        transition: all 0.2s ease;
+    }
+    
+    .mission-card:hover {
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        transform: translateY(-2px);
+    }
+    
+    .mission-card-header {
+        border-bottom: 1px solid #edf2f7;
+        background: linear-gradient(to right, #f0f4f8, #e6edf5);
+        border-radius: 6px 6px 0 0;
+        padding: 12px 16px;
+    }
+    
+    /* Tabs */
+    .tab-btn {
+        color: #555555;
+        background-color: #f0f4f8;
+        border: 1px solid #e0e6ed;
+        border-radius: 4px 4px 0 0;
+        font-weight: 500;
+        transition: all 0.2s ease;
+    }
+    
+    .tab-btn:hover {
+        background-color: #e6edf5;
+    }
+    
+    .tab-btn.active {
+        background-color: white;
+        color: #4285f4;
+        border-bottom-color: white;
+        font-weight: 600;
+    }
+    
+    /* Mission type indicators */
+    .mission-type-indicator {
+        border: 1px solid #e0e6ed;
+        border-radius: 4px;
+        padding: 6px 10px;
+        font-weight: 500;
+    }
+}
+
+/* Font sizes */
+.font-small {
+    font-size: 0.85rem;
+}
+
+.font-medium {
+    font-size: 1rem;
+}
+
+.font-large {
+    font-size: 1.15rem;
+}
+
+/* Compact mode */
+.compact-mode .table-container td,
+.compact-mode .table-container th {
+    padding: 6px 12px;
+}
+
+.compact-mode .card,
+.compact-mode .panel,
+.compact-mode .section-content {
+    padding: 12px;
+}
+
+.compact-mode .form-group {
+    margin-bottom: 10px;
+}
+
+/* Disabled animations */
+.no-animations * {
+    transition: none !important;
+    animation: none !important;
+}
+
+/* System info popup styling */
+.system-info-popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.9);
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    width: 400px;
+    max-width: 90vw;
+    padding: 20px;
+    z-index: 10000;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s;
+}
+
+.system-info-popup.active {
+    opacity: 1;
+    visibility: visible;
+    transform: translate(-50%, -50%) scale(1);
+}
+
+.system-info-close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    color: var(--text-secondary);
+    font-size: 1.5rem;
+    cursor: pointer;
+    padding: 5px;
+    line-height: 1;
+}
+
+.system-info-close:hover {
+    color: var(--text-color);
+}
+
+.system-info-header {
+    margin-bottom: 15px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.system-info-header h3 {
+    margin: 0;
+    color: var(--accent-color);
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+.system-info-content {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.system-info-item {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.info-label {
+    font-weight: 600;
+    color: var(--text-color);
+    font-size: 0.9rem;
+}
+
+.info-value {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    line-height: 1.4;
+}
+
+/* Overlay for popup */
+.system-info-popup::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: -1;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.system-info-popup.active::before {
+    opacity: 1;
+}
+
+/* Font Size Classes */
+.font-small {
+    font-size: 0.9rem;
+}
+
+.font-small .app-title,
+.font-small .page-title {
+    font-size: 1.4rem;
+}
+
+.font-small h1 {
+    font-size: 1.6rem;
+}
+
+.font-small h2 {
+    font-size: 1.3rem;
+}
+
+.font-small h3 {
+    font-size: 1.1rem;
+}
+
+.font-small .setting-item label,
+.font-small .settings-nav-item,
+.font-small .nav-item {
+    font-size: 0.85rem;
+}
+
+.font-medium {
+    font-size: 1rem;
+}
+
+.font-medium .app-title,
+.font-medium .page-title {
+    font-size: 1.5rem;
+}
+
+.font-medium h1 {
+    font-size: 1.8rem;
+}
+
+.font-medium h2 {
+    font-size: 1.5rem;
+}
+
+.font-medium h3 {
+    font-size: 1.2rem;
+}
+
+.font-large {
+    font-size: 1.1rem;
+}
+
+.font-large .app-title,
+.font-large .page-title {
+    font-size: 1.7rem;
+}
+
+.font-large h1 {
+    font-size: 2rem;
+}
+
+.font-large h2 {
+    font-size: 1.7rem;
+}
+
+.font-large h3 {
+    font-size: 1.4rem;
+}
+
+.font-large .setting-item label,
+.font-large .settings-nav-item,
+.font-large .nav-item {
+    font-size: 1.05rem;
+}
+
+/* Compact Mode */
+.compact-mode .content-section {
+    padding: 0.75rem;
+}
+
+.compact-mode .table-container {
+    margin-bottom: 0.75rem;
+}
+
+.compact-mode .mission-table td,
+.compact-mode .mission-table th {
+    padding: 0.5rem;
+} 

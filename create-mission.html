@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Mission - Chicken Jockey Coordination System</title>
+    <link rel="stylesheet" href="dashboard.css">
+    <link rel="stylesheet" href="create-mission.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="logo">
+                <img src="logo.png" alt="CJCS Logo">
+            </div>
+            <nav class="sidebar-nav">
+                <button class="nav-item active">MISSIONS</button>
+                <button class="nav-item">UNITS</button>
+                <button class="nav-item">REPORTS</button>
+                <button class="nav-item">SETTINGS</button>
+            </nav>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+            <!-- Top Bar -->
+            <header class="topbar">
+                <h1 class="app-title">CHICKEN JOCKEY COORDINATION SYSTEM</h1>
+                <div class="user-profile" id="user-profile">
+                    <span id="username-display">USER</span>
+                    <div class="user-icon">
+                        <svg viewBox="0 0 24 24" width="24" height="24">
+                            <circle cx="12" cy="8" r="4" fill="currentColor"/>
+                            <path d="M4 20c0-4.4 3.6-8 8-8s8 3.6 8 8" fill="currentColor"/>
+                        </svg>
+                    </div>
+                    
+                    <!-- User Profile Dropdown -->
+                    <div class="user-dropdown" id="user-dropdown">
+                        <div class="user-dropdown-header">
+                            <h3 id="user-fullname">User Profile</h3>
+                            <p id="user-role">Role: User</p>
+                        </div>
+                        <div class="user-dropdown-content">
+                            <div class="user-info-item">
+                                <div class="user-info-label">Username:</div>
+                                <div class="user-info-value" id="dropdown-username"></div>
+                            </div>
+                            <div class="user-info-item">
+                                <div class="user-info-label">Email:</div>
+                                <div class="user-info-value" id="dropdown-email"></div>
+                            </div>
+                        </div>
+                        <div class="user-dropdown-footer">
+                            <button class="logout-btn" id="logout-btn">Logout</button>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Create Mission Section -->
+            <section class="content-section">
+                <div class="section-header create-header">
+                    <h2>CREATE NEW MISSION</h2>
+                </div>
+
+                <form id="create-mission-form">
+                    <div class="create-mission-container">
+                        <!-- Left Column - Mission Details -->
+                        <div class="mission-details-container">
+                            <div class="form-section">
+                                <h3 class="section-title">MISSION DETAILS</h3>
+                                <div class="form-group">
+                                    <label for="mission-name">Mission Name</label>
+                                    <input type="text" id="mission-name" name="missionName" placeholder="Enter mission name" required>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="mission-type">Mission Type</label>
+                                    <select id="mission-type" name="missionType" required>
+                                        <option value="" disabled selected>Select a mission type</option>
+                                        <option value="reconnaissance">Reconnaissance</option>
+                                        <option value="patrol">Patrol</option>
+                                        <option value="exploration">Exploration</option>
+                                        <option value="surveillance">Surveillance</option>
+                                        <option value="investigation">Investigation</option>
+                                    </select>
+                                </div>
+                                
+                                <div class="date-time-container">
+                                    <div class="form-group">
+                                        <label for="start-date">Start Date</label>
+                                        <input type="date" id="start-date" name="startDate" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="start-time">Start Time</label>
+                                        <input type="time" id="start-time" name="startTime" required>
+                                    </div>
+                                </div>
+                                
+                                <div class="date-time-container">
+                                    <div class="form-group">
+                                        <label for="end-date">End Date</label>
+                                        <input type="date" id="end-date" name="endDate" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="end-time">End Time</label>
+                                        <input type="time" id="end-time" name="endTime" required>
+                                    </div>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="description">Description</label>
+                                    <textarea id="description" name="description" rows="5" placeholder="Enter mission description"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Right Column - Unit Assignment & Mission Route -->
+                        <div class="mission-right-container">
+                            <!-- Unit Assignment Section -->
+                            <div class="form-section">
+                                <h3 class="section-title">UNIT ASSIGNMENT</h3>
+                                <div class="unit-list">
+                                    <div class="unit-item">
+                                        <input type="checkbox" id="unit-1" name="units" value="unit1">
+                                        <label for="unit-1">Unit 1</label>
+                                    </div>
+                                    <div class="unit-item">
+                                        <input type="checkbox" id="unit-2" name="units" value="unit2">
+                                        <label for="unit-2">Unit 2</label>
+                                    </div>
+                                    <div class="unit-item">
+                                        <input type="checkbox" id="unit-3" name="units" value="unit3">
+                                        <label for="unit-3">Unit 3</label>
+                                    </div>
+                                    <div class="unit-item">
+                                        <input type="checkbox" id="unit-4" name="units" value="unit4">
+                                        <label for="unit-4">Unit 4</label>
+                                    </div>
+                                    <div class="unit-item">
+                                        <input type="checkbox" id="unit-5" name="units" value="unit5">
+                                        <label for="unit-5">Unit 5</label>
+                                    </div>
+                                    <div class="unit-item">
+                                        <input type="checkbox" id="unit-6" name="units" value="unit6">
+                                        <label for="unit-6">Unit 6</label>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Mission Route Section -->
+                            <div class="form-section">
+                                <h3 class="section-title">MISSION ROUTE</h3>
+                                <div class="route-map-container">
+                                    <div class="route-map" id="route-map">
+                                        <!-- Map placeholder -->
+                                        <div class="map-placeholder">
+                                            <div class="map-grid">
+                                                <!-- Grid lines for map -->
+                                                <div class="grid-line horizontal"></div>
+                                                <div class="grid-line horizontal"></div>
+                                                <div class="grid-line horizontal"></div>
+                                                <div class="grid-line vertical"></div>
+                                                <div class="grid-line vertical"></div>
+                                                <div class="grid-line vertical"></div>
+                                            </div>
+                                            <div id="route-points"></div>
+                                            <div class="map-instructions">Click on the map to add route points</div>
+                                        </div>
+                                    </div>
+                                    <div class="route-actions">
+                                        <button type="button" id="clear-route" class="btn-secondary">Clear Route</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Form Actions -->
+                    <div class="form-actions">
+                        <button type="button" id="cancel-mission" class="btn-cancel">CANCEL</button>
+                        <button type="submit" id="save-mission" class="btn-save">SAVE MISSION</button>
+                    </div>
+                </form>
+            </section>
+        </main>
+    </div>
+
+    <div id="notification" class="notification">
+        <span id="notification-message">Mission created successfully!</span>
+    </div>
+
+    <script src="create-mission.js"></script>
+    <script src="user-profile.js"></script>
+</body>
+</html>

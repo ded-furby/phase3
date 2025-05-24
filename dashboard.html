@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chicken Jockey Coordination System</title>
+    <link rel="stylesheet" href="dashboard.css">
+    <link rel="stylesheet" href="themes.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="theme-loader.js"></script>
+</head>
+<body>
+    <div class="app-container">
+        <aside class="sidebar">
+            <div class="logo">
+                <img src="logo.png" alt="CJCS Logo">
+            </div>
+            <nav class="sidebar-nav">
+                <button class="nav-item active" data-target="tracking.html">MISSIONS</button>
+                <button class="nav-item" data-target="units.html" >UNITS</button>
+                <button class="nav-item" data-target="tracking.html">TRACKING</button>
+                <button class="nav-item" data-target="messaging.html">COMMS</button>
+                <button class="nav-item" data-target="reports.html">REPORTS</button>
+                <button class="nav-item" data-target="settings.html">SETTINGS</button>
+            </nav>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+            <!-- Top Bar -->
+            <header class="topbar">
+                <h1 class="app-title">CHICKEN JOCKEY COORDINATION SYSTEM</h1>
+                <div class="user-profile" id="user-profile">
+                    <span id="username-display">USER</span>
+                    <div class="user-icon">
+                        <svg viewBox="0 0 24 24" width="24" height="24">
+                            <circle cx="12" cy="8" r="4" fill="currentColor"/>
+                            <path d="M4 20c0-4.4 3.6-8 8-8s8 3.6 8 8" fill="currentColor"/>
+                        </svg>
+                    </div>
+                    
+                    <!-- User Profile Dropdown -->
+                    <div class="user-dropdown" id="user-dropdown">
+                        <div class="user-dropdown-header">
+                            <h3 id="user-fullname">User Profile</h3>
+                            <p id="user-role">Role: User</p>
+                        </div>
+                        <div class="user-dropdown-content">
+                            <div class="user-info-item">
+                                <div class="user-info-label">Username:</div>
+                                <div class="user-info-value" id="dropdown-username"></div>
+                            </div>
+                            <div class="user-info-item">
+                                <div class="user-info-label">Email:</div>
+                                <div class="user-info-value" id="dropdown-email"></div>
+                            </div>
+                        </div>
+                        <div class="user-dropdown-footer">
+                            <button class="logout-btn" id="logout-btn">Logout</button>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Mission Management Section -->
+            <section class="content-section">
+                <div class="section-header">
+                    <h2>MISSION MANAGEMENT</h2>
+                </div>
+
+                <!-- Navigation Tabs -->
+                <div class="tabs-container">
+                    <div class="tabs">
+                        <button class="tab-btn active" data-tab="active-missions">ACTIVE MISSIONS</button>
+                        
+                        <button class="tab-btn" data-tab="mission-archives">MISSION ARCHIVES</button>
+                        <button class="tab-btn" data-tab="resolve-conflicts">
+                            RESOLVE CONFLICTS
+                            <span class="conflict-badge" id="conflict-counter">0</span>
+                        </button>
+                    </div>
+
+                    <!-- Tab Content -->
+                    <div class="tab-content active" id="active-missions">
+                        <!-- Mission Table -->
+                        <div class="table-container">
+                            <table class="mission-table">
+                                <thead>
+                                    <tr>
+                                        <th>Mission ID</th>
+                                        <th>Name</th>
+                                        <th>Units</th>
+                                        <th>Status</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="mission-table-body">
+                                   
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <!-- Table Footer Controls -->
+                        <div class="table-controls">
+                            <div class="filter-control">
+                                <select id="filter-dropdown">
+                                    <option value="all">All Missions</option>
+                                    <option value="active">Active Only</option>
+                                    <option value="pending">Pending Only</option>
+                                    <option value="completed">Completed Only</option>
+                                </select>
+                            </div>
+                            <div class="sort-control">
+                                <select id="sort-dropdown">
+                                    <option value="id">Sort by ID</option>
+                                    <option value="name">Sort by Name</option>
+                                    <option value="status">Sort by Status</option>
+                                </select>
+                            </div>
+                            <button class="btn-create">CREATE MISSION</button>
+                        </div>
+                    </div>
+
+                    <div class="tab-content" id="mission-calendar">
+                        <div class="calendar-container">
+                            <!-- Calendar Header -->
+                            <div class="calendar-header">
+                                <button class="prev-month">
+                                    <svg viewBox="0 0 24 24" width="16" height="16">
+                                        <path d="M15 18l-6-6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                                    </svg>
+                                </button>
+                                <h3 class="current-month">April 2023</h3>
+                                <button class="next-month">
+                                    <svg viewBox="0 0 24 24" width="16" height="16">
+                                        <path d="M9 18l6-6-6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                                    </svg>
+                                </button>
+                            </div>
+                            
+                            <!-- Calendar Grid -->
+                            <div class="calendar-grid">
+                                <!-- Weekday Headers -->
+                                <div class="weekday-header">Sun</div>
+                                <div class="weekday-header">Mon</div>
+                                <div class="weekday-header">Tue</div>
+                                <div class="weekday-header">Wed</div>
+                                <div class="weekday-header">Thu</div>
+                                <div class="weekday-header">Fri</div>
+                                <div class="weekday-header">Sat</div>
+                                
+                                <!-- Calendar Days (will be populated by JS) -->
+                                <div class="calendar-days" id="calendar-days">
+                                    <!-- Days will be inserted here by JavaScript -->
+                                </div>
+                            </div>
+                            
+                            <!-- Mission Type Legend -->
+                            <div class="mission-legend">
+                                <div class="legend-title">Mission Status</div>
+                                <div class="legend-items">
+                                    <div class="legend-item">
+                                        <span class="mission-dot active"></span>
+                                        <span>Active</span>
+                                    </div>
+                                    <div class="legend-item">
+                                        <span class="mission-dot pending"></span>
+                                        <span>Pending</span>
+                                    </div>
+                                    <div class="legend-item">
+                                        <span class="mission-dot completed"></span>
+                                        <span>Completed</span>
+                                    </div>
+                                </div>
+                                
+                                <div class="legend-title" style="margin-top: 15px;">Mission Type</div>
+                                <div class="legend-items">
+                                    <div class="legend-item">
+                                        <span class="mission-type-indicator recon"></span>
+                                        <span>Reconnaissance</span>
+                                    </div>
+                                    <div class="legend-item">
+                                        <span class="mission-type-indicator combat"></span>
+                                        <span>Combat/Patrol</span>
+                                    </div>
+                                    <div class="legend-item">
+                                        <span class="mission-type-indicator supply"></span>
+                                        <span>Supply</span>
+                                    </div>
+                                    <div class="legend-item">
+                                        <span class="mission-type-indicator training"></span>
+                                        <span>Training</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Slide-in Mission Details Panel -->
+                        <div class="mission-details-panel" id="mission-details-panel">
+                            <div class="panel-header">
+                                <h3 id="panel-date-title">Missions on April 3, 2023</h3>
+                                <button class="close-panel">
+                                    <svg viewBox="0 0 24 24" width="18" height="18">
+                                        <path d="M18 6L6 18M6 6l12 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                                    </svg>
+                                </button>
+                            </div>
+                            <div class="panel-content">
+                                <div id="date-missions-list" class="date-missions-list">
+                                    <!-- Mission list will be populated by JS -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tab-content" id="mission-archives">
+                        <div class="placeholder-content">
+                            <h3>Mission Archives</h3>
+                            <p>Archived missions will be displayed here.</p>
+                        </div>
+                    </div>
+
+                    <div class="tab-content" id="resolve-conflicts">
+                        <div class="conflict-resolution-container">
+                            <!-- Left Panel - Resolve Mission Conflicts -->
+                            <div class="conflict-panel">
+                                <h3>Resolve Mission Conflict</h3>
+                                
+                                <div class="mission-conflict-card">
+                                    <div class="mission-info">
+                                        <h4>Mission 1</h4>
+                                        <div class="info-row"><span>ID:</span> #1138</div>
+                                        <div class="info-row"><span>Name:</span> Woodland Reconnaissance</div>
+                                        <div class="info-row"><span>Date:</span> 05/15/2023</div>
+                                        <div class="info-row"><span>Time:</span> 08:00 - 12:00</div>
+                                        <div class="info-row conflict-highlight"><span>Units:</span> <strong>Unit1</strong>, Unit3</div>
+                                    </div>
+                                    
+                                    <div class="conflict-warning">
+                                        <svg viewBox="0 0 24 24" width="20" height="20">
+                                            <path d="M12 2L1 21h22L12 2zm0 16h-2v2h2v-2zm0-7h-2v5h2v-5z" fill="currentColor"/>
+                                        </svg>
+                                        <span>CONFLICT</span>
+                                    </div>
+                                </div>
+                                
+                                <div class="mission-conflict-card">
+                                    <div class="mission-info">
+                                        <h4>Mission 2</h4>
+                                        <div class="info-row"><span>ID:</span> #1142</div>
+                                        <div class="info-row"><span>Name:</span> Supply Run Alpha</div>
+                                        <div class="info-row"><span>Date:</span> 05/15/2023</div>
+                                        <div class="info-row"><span>Time:</span> 10:00 - 14:00</div>
+                                        <div class="info-row conflict-highlight"><span>Units:</span> <strong>Unit1</strong>, Unit2</div>
+                                    </div>
+                                    
+                                    <div class="conflict-warning">
+                                        <svg viewBox="0 0 24 24" width="20" height="20">
+                                            <path d="M12 2L1 21h22L12 2zm0 16h-2v2h2v-2zm0-7h-2v5h2v-5z" fill="currentColor"/>
+                                        </svg>
+                                        <span>CONFLICT</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Right Panel - Resolution Form -->
+                            <div class="resolution-panel">
+                                <h3>Conflict Resolution</h3>
+                                
+                                <form id="resolution-form" class="resolution-form">
+                                    <div class="form-group">
+                                        <label for="resolution-type">Resolution Type</label>
+                                        <select id="resolution-type">
+                                            <option value="reschedule">Reschedule Mission</option>
+                                            <option value="reassign">Reassign Units</option>
+                                            <option value="cancel">Cancel Mission</option>
+                                        </select>
+                                    </div>
+                                    
+                                    <div class="form-group" id="reschedule-options">
+                                        <label for="new-date">New Date</label>
+                                        <input type="date" id="new-date">
+                                        
+                                        <div class="time-inputs">
+                                            <div>
+                                                <label for="new-start-time">Start Time</label>
+                                                <input type="time" id="new-start-time">
+                                            </div>
+                                            <div>
+                                                <label for="new-end-time">End Time</label>
+                                                <input type="time" id="new-end-time">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="form-group" id="reassign-options" style="display: none;">
+                                        <label>Select Units to Reassign</label>
+                                        <div class="unit-checkboxes">
+                                            <div class="unit-checkbox">
+                                                <input type="checkbox" id="unit1" value="unit1">
+                                                <label for="unit1">Unit 1</label>
+                                            </div>
+                                            <div class="unit-checkbox">
+                                                <input type="checkbox" id="unit2" value="unit2">
+                                                <label for="unit2">Unit 2</label>
+                                            </div>
+                                            <div class="unit-checkbox">
+                                                <input type="checkbox" id="unit3" value="unit3">
+                                                <label for="unit3">Unit 3</label>
+                                            </div>
+                                        </div>
+                                        
+                                        <label for="new-unit">Assign To</label>
+                                        <select id="new-unit">
+                                            <option value="unit4">Unit 4</option>
+                                            <option value="unit5">Unit 5</option>
+                                            <option value="unit6">Unit 6</option>
+                                        </select>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label for="resolution-notes">Notes</label>
+                                        <textarea id="resolution-notes" placeholder="Enter any additional notes..."></textarea>
+                                    </div>
+                                    
+                                    <div class="form-actions">
+                                        <button type="submit" class="btn-resolve">Save Changes</button>
+                                        <button type="button" class="btn-cancel">Cancel</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Mission Edit Modal -->
+    <div id="mission-edit-modal" class="mission-edit-modal">
+        <div class="mission-edit-content">
+            <div class="modal-header">
+                <h3 id="edit-mission-title">Editing mission #1143</h3>
+                <button id="close-modal" class="close-modal">Close</button>
+            </div>
+            <div class="modal-body">
+                <form id="edit-mission-form">
+                    <div class="form-group">
+                        <label for="edit-mission-name">Mission Name</label>
+                        <input type="text" id="edit-mission-name" class="form-control" required>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group half">
+                            <label for="edit-mission-date">Date</label>
+                            <input type="text" id="edit-mission-date" class="form-control" placeholder="MM/DD/YYYY" required>
+                        </div>
+                        <div class="form-group half">
+                            <label for="edit-mission-status">Status</label>
+                            <select id="edit-mission-status" class="form-control">
+                                <option value="ACTIVE">ACTIVE</option>
+                                <option value="PENDING">PENDING</option>
+                                <option value="COMPLETED">COMPLETED</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group half">
+                            <label for="edit-start-time">Start Time</label>
+                            <input type="text" id="edit-start-time" class="form-control" placeholder="HH:MM AM/PM" required>
+                        </div>
+                        <div class="form-group half">
+                            <label for="edit-end-time">End Time</label>
+                            <input type="text" id="edit-end-time" class="form-control" placeholder="HH:MM AM/PM" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Assigned Units</label>
+                        <div class="unit-checkboxes">
+                            <div class="unit-checkbox">
+                                <input type="checkbox" id="edit-unit1" value="unit1">
+                                <label for="edit-unit1">Unit 1</label>
+                            </div>
+                            <div class="unit-checkbox">
+                                <input type="checkbox" id="edit-unit2" value="unit2">
+                                <label for="edit-unit2">Unit 2</label>
+                            </div>
+                            <div class="unit-checkbox">
+                                <input type="checkbox" id="edit-unit3" value="unit3">
+                                <label for="edit-unit3">Unit 3</label>
+                            </div>
+                            <div class="unit-checkbox">
+                                <input type="checkbox" id="edit-unit4" value="unit4">
+                                <label for="edit-unit4">Unit 4</label>
+                            </div>
+                            <div class="unit-checkbox">
+                                <input type="checkbox" id="edit-unit5" value="unit5">
+                                <label for="edit-unit5">Unit 5</label>
+                            </div>
+                            <div class="unit-checkbox">
+                                <input type="checkbox" id="edit-unit6" value="unit6">
+                                <label for="edit-unit6">Unit 6</label>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <input type="hidden" id="edit-mission-index">
+                    <div class="form-actions">
+                        <button type="button" id="delete-mission" class="btn-delete">Delete Mission</button>
+                        <button type="submit" class="btn-save">Save Changes</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="dashboard.js"></script>
+    <script src="user-profile.js"></script>
+</body>
+</html>

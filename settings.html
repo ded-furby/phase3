@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settings - Chicken Jockey Coordination System</title>
+    <link rel="stylesheet" href="dashboard.css"><!-- keep the base grid / variables -->
+    <link rel="stylesheet" href="themes.css"><!-- theme definitions -->
+    <link rel="stylesheet" href="settings.css"><!-- new file below -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="theme-loader.js"></script>
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="logo">
+                <img src="logo.png" alt="CJCS Logo">
+            </div>
+            <nav class="sidebar-nav">
+                <button class="nav-item">MISSIONS</button>
+                <button class="nav-item">UNITS</button>
+                <button class="nav-item tracking-nav">TRACKING</button>
+                <button class="nav-item comms-nav">COMMS</button>
+                <button class="nav-item">REPORTS</button>
+                <button class="nav-item active">SETTINGS</button>
+            </nav>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+            <!-- Top Bar -->
+            <header class="topbar">
+                <h1 class="app-title">SYSTEM SETTINGS</h1>
+                <div class="user-profile" id="user-profile">
+                    <span id="username-display">USER</span>
+                    <div class="user-icon">
+                        <svg viewBox="0 0 24 24" width="24" height="24">
+                            <circle cx="12" cy="8" r="4" fill="currentColor"/>
+                            <path d="M4 20c0-4.4 3.6-8 8-8s8 3.6 8 8" fill="currentColor"/>
+                        </svg>
+                    </div>
+                    
+                    <!-- User Profile Dropdown -->
+                    <div class="user-dropdown" id="user-dropdown">
+                        <div class="user-dropdown-header">
+                            <h3 id="user-fullname">User Profile</h3>
+                            <p id="user-role">Role: User</p>
+                        </div>
+                        <div class="user-dropdown-content">
+                            <div class="user-info-item">
+                                <div class="user-info-label">Username:</div>
+                                <div class="user-info-value" id="dropdown-username"></div>
+                            </div>
+                            <div class="user-info-item">
+                                <div class="user-info-label">Email:</div>
+                                <div class="user-info-value" id="dropdown-email"></div>
+                            </div>
+                        </div>
+                        <div class="user-dropdown-footer">
+                            <button class="logout-btn" id="logout-btn">Logout</button>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Settings Section -->
+            <section class="content-section">
+                <div class="section-header">
+                    <h2>SYSTEM CONFIGURATION</h2>
+                </div>
+
+                <!-- Settings Navigation -->
+                <div class="settings-nav">
+                    <button class="settings-nav-item active" data-tab="general">General</button>
+                    <button class="settings-nav-item" data-tab="appearance">Appearance</button>
+                </div>
+
+                <!-- Settings Content -->
+                <div class="settings-content">
+                    <!-- General Settings -->
+                    <div class="settings-panel active" id="general">
+                        <h3>General Settings</h3>
+                        <p class="settings-description">Configure basic system settings and preferences.</p>
+                        
+                        <div class="setting-category">
+                            <h4>System Configuration</h4>
+                            <div class="settings-group">
+                                <div class="setting-item">
+                                    <label>System Name</label>
+                                    <input type="text" value="Chicken Jockey Coordination System" class="settings-input">
+                                    <span class="setting-help">The name displayed throughout the application</span>
+                                </div>
+                                <div class="setting-item">
+                                    <label>Organization ID</label>
+                                    <input type="text" value="CJCS-001" class="settings-input">
+                                    <span class="setting-help">Unique identifier for your organization</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="setting-category">
+                            <h4>Regional Settings</h4>
+                            <div class="settings-group">
+                                <div class="setting-item">
+                                    <label>Time Zone</label>
+                                    <select class="settings-input">
+                                        <option>UTC</option>
+                                        <option>EST</option>
+                                        <option>PST</option>
+                                        <option>GMT</option>
+                                        <option>IST</option>
+                                    </select>
+                                    <span class="setting-help">Default time zone for all operations</span>
+                                </div>
+                                <div class="setting-item">
+                                    <label>Date Format</label>
+                                    <select class="settings-input">
+                                        <option>MM/DD/YYYY</option>
+                                        <option>DD/MM/YYYY</option>
+                                        <option>YYYY-MM-DD</option>
+                                    </select>
+                                    <span class="setting-help">How dates are displayed throughout the system</span>
+                                </div>
+                                <div class="setting-item">
+                                    <label>Time Format</label>
+                                    <select class="settings-input">
+                                        <option>12-hour (AM/PM)</option>
+                                        <option>24-hour</option>
+                                    </select>
+                                    <span class="setting-help">How times are displayed throughout the system</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Appearance Settings -->
+                    <div class="settings-panel" id="appearance">
+                        <h3>Appearance Settings</h3>
+                        <p class="settings-description">Customize the look and feel of your interface.</p>
+                        
+                        <div class="setting-category">
+                            <h4>Interface Theme</h4>
+                            <div class="settings-group">
+                                <div class="setting-item">
+                                    <label>Theme</label>
+                                    <select class="settings-input">
+                                        <option>Light</option>
+                                        <option selected>Dark</option>
+                                    </select>
+                                    <span class="setting-help">Choose between light and dark theme</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="setting-category">
+                            <h4>Text & Display</h4>
+                            <div class="settings-group">
+                                <div class="setting-item">
+                                    <label>Font Size</label>
+                                    <select class="settings-input">
+                                        <option>Small</option>
+                                        <option selected>Medium</option>
+                                        <option>Large</option>
+                                    </select>
+                                    <span class="setting-help">Size of text throughout the application</span>
+                                </div>
+                                <div class="setting-item">
+                                    <label>Compact Mode
+                                        <div class="toggle-switch">
+                                            <input type="checkbox" id="compact-mode">
+                                            <label for="compact-mode"></label>
+                                        </div>
+                                    </label>
+                                    <span class="setting-help">Display more information with less spacing</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Save Button -->
+                <div class="settings-actions">
+                    <button class="btn-cancel">Cancel</button>
+                    <button class="btn-save">Save Changes</button>
+                </div>
+            </section>
+        </main>
+    </div>
+    <script src="settings.js"></script>
+    <script src="user-profile.js"></script>
+</body>
+</html>

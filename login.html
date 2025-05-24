@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Login - CJCS</title>
+  <link rel="stylesheet" href="login.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="login-wrapper">
+    <section class="login-card">
+      <img src="logo.png" alt="CJCS Logo" class="cjcs-logo" />
+      <h1 class="login-title">Sign In</h1>
+      <form id="login-form">
+        <div class="input-group">
+          <label for="username">Username</label>
+          <input type="text" id="username" name="username" required placeholder="e.g., commander123">
+        </div>
+        <div class="input-group">
+          <label for="password">Password</label>
+          <input type="password" id="password" name="password" required placeholder="••••••••">
+        </div>
+        <div class="options">
+          <label class="remember-label">
+            <input type="checkbox" id="remember" name="remember" />
+            Remember me
+          </label>
+          <a href="#" class="forgot-link">Forgot password?</a>
+        </div>
+        <button type="submit" class="btn-primary">Login</button>
+        <button type="button" id="direct-login" class="btn-outline">Login Directly (No Server)</button>
+      </form>
+      <div class="signup">
+        Don’t have an account? <a href="signup.html">Sign up</a>
+      </div>
+    </section>
+  </div>
+
+  <script>
+    function tryLogin(username, password) {
+      try {
+        console.log('Attempting login for:', username);
+        
+        // PRIORITY 1: Check localStorage first (where signup stores users)
+        const localUsers = localStorage.getItem('users');
+        if (localUsers) {
+          try {
+            const users = JSON.parse(localUsers);
+            console.log('Found users in localStorage:', users.users.length);
+            
+            // Debug: Log all usernames in localStorage
+            console.log('Available usernames:', users.users.map(u => u.username).join(', '));
+            
+            const user = users.users.find(u => u.username === username && u.password === password);
+            if (user) {
+              console.log('User authenticated from localStorage:', user.username, 'with role:', user.role);
+              sessionStorage.setItem('currentUser', JSON.stringify({
+                username: user.username,
+                email: user.email,
+                role: user.role
+              }));
+              return true;
+            }
+          } catch (e) {
+            console.error('Error parsing localStorage users:', e);
+          }
+        } else {
+          console.log('No users found in localStorage');
+        }
+        
+        // PRIORITY 2: Check users.json file
+        try {
+          const xhr = new XMLHttpRequest();
+          xhr.open('GET', 'users.json', false); // Synchronous request
+          xhr.send(null);
+          
+          if (xhr.status === 200) {
+            const fileUsers = JSON.parse(xhr.responseText).users;
+            console.log('Loaded users from users.json file');
+            
+            const user = fileUsers.find(u => u.username === username && u.password === password);
+            if (user) {
+              console.log('User authenticated from users.json:', user.username);
+              sessionStorage.setItem('currentUser', JSON.stringify({
+                username: user.username,
+                email: user.email,
+                role: user.role
+              }));
+              return true;
+            }
+          }
+        } catch (e) {
+          console.error('Error loading users.json:', e);
+        }
+        
+        // PRIORITY 3: Check hardcoded default users
+        const defaultUsers = [
+          {
+            "username": "admin",
+            "password": "admin123",
+            "email": "admin@chickenjockey.com",
+            "role": "admin"
+          },
+          {
+            "username": "commander",
+            "password": "command123",
+            "email": "commander@chickenjockey.com",
+            "role": "commander"
+          }
+        ];
+        
+        const defaultUser = defaultUsers.find(u => u.username === username && u.password === password);
+        if (defaultUser) {
+          console.log('User authenticated from defaults:', defaultUser.username);
+          sessionStorage.setItem('currentUser', JSON.stringify({
+            username: defaultUser.username,
+            email: defaultUser.email,
+            role: defaultUser.role
+          }));
+          return true;
+        }
+        
+        console.log('Authentication failed for user:', username);
+        return false;
+      } catch (error) {
+        console.error('Login error:', error);
+        return false;
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      // Handle direct login
+      const directLoginBtn = document.getElementById('direct-login');
+      directLoginBtn.addEventListener('click', () => {
+        const username = document.getElementById('username').value.trim();
+        const password = document.getElementById('password').value.trim();
+
+        if (!username || !password) {
+          alert('Please enter both username and password');
+          return;
+        }
+
+        const success = tryLogin(username, password);
+        if (success) {
+          // Get user role from session storage
+          const userData = JSON.parse(sessionStorage.getItem('currentUser'));
+          redirectBasedOnRole(userData.role);
+        } else {
+          alert('Invalid username or password');
+        }
+      });
+
+      // Handle standard login (submit button)
+      const loginForm = document.getElementById('login-form');
+      loginForm.addEventListener('submit', (e) => {
+        e.preventDefault(); // Prevent form reload
+        const username = document.getElementById('username').value.trim();
+        const password = document.getElementById('password').value.trim();
+
+        if (!username || !password) {
+          alert('Please enter both username and password');
+          return;
+        }
+
+        const success = tryLogin(username, password);
+        if (success) {
+          // Get user role from session storage
+          const userData = JSON.parse(sessionStorage.getItem('currentUser'));
+          redirectBasedOnRole(userData.role);
+        } else {
+          alert('Invalid username or password');
+        }
+      });
+    });
+    // Function to redirect users based on their role
+    function redirectBasedOnRole(role) {
+      if (role === 'admin') {
+        window.location.href = 'dashboard.html'; // Admin dashboard
+      } else if (role === 'commander') {
+        window.location.href = 'dashboard.html'; // Commander dashboard
+      } else {
+        window.location.href = 'dashboard.html?mode=user'; // User dashboard with limited access
+      }
+    }
+  </script>
+</body>
+</html>

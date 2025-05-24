@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Units Management - Chicken Jockey Coordination System</title>
+    <link rel="stylesheet" href="dashboard.css">
+    <link rel="stylesheet" href="themes.css">
+    <link rel="stylesheet" href="units.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="theme-loader.js"></script>
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="logo">
+                <img src="logo.png" alt="CJCS Logo">
+            </div>
+            <nav class="sidebar-nav">
+                <button class="nav-item">MISSIONS</button>
+                <button class="nav-item active">UNITS</button>
+                <button class="nav-item tracking-nav">TRACKING</button>
+                <button class="nav-item comms-nav">COMMS</button>
+                <button class="nav-item">REPORTS</button>
+                <button class="nav-item">SETTINGS</button>
+            </nav>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+            <!-- Top Bar -->
+            <header class="topbar">
+                <h1 class="app-title">UNITS MANAGEMENT</h1>
+                <div class="user-profile" id="user-profile">
+                    <span id="username-display">USER</span>
+                    <div class="user-icon">
+                        <svg viewBox="0 0 24 24" width="24" height="24">
+                            <circle cx="12" cy="8" r="4" fill="currentColor"/>
+                            <path d="M4 20c0-4.4 3.6-8 8-8s8 3.6 8 8" fill="currentColor"/>
+                        </svg>
+                    </div>
+                    
+                    <!-- User Profile Dropdown -->
+                    <div class="user-dropdown" id="user-dropdown">
+                        <div class="user-dropdown-header">
+                            <h3 id="user-fullname">User Profile</h3>
+                            <p id="user-role">Role: User</p>
+                        </div>
+                        <div class="user-dropdown-content">
+                            <div class="user-info-item">
+                                <div class="user-info-label">Username:</div>
+                                <div class="user-info-value" id="dropdown-username"></div>
+                            </div>
+                            <div class="user-info-item">
+                                <div class="user-info-label">Email:</div>
+                                <div class="user-info-value" id="dropdown-email"></div>
+                            </div>
+                        </div>
+                        <div class="user-dropdown-footer">
+                            <button class="logout-btn" id="logout-btn">Logout</button>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Units Management Section -->
+            <section class="content-section">
+                <div class="section-header">
+                    <h2>UNIT STATUS</h2>
+                </div>
+
+                <!-- Navigation Tabs -->
+                <div class="tabs-container">
+                    <div class="tabs">
+                        <button class="tab-btn active" data-tab="active-units">ACTIVE UNITS</button>
+                        <button class="tab-btn" data-tab="unit-status">UNIT STATUS</button>
+                        <button class="tab-btn" data-tab="unit-history">UNIT HISTORY</button>
+                    </div>
+
+                    <!-- Tab Content -->
+                    <div class="tab-content active" id="active-units">
+                        <!-- Units Table -->
+                        <div class="table-container">
+                            <table class="mission-table">
+                                <thead>
+                                    <tr>
+                                        <th>Unit ID</th>
+                                        <th>Name</th>
+                                        <th>Status</th>
+                                        <th>Current Mission</th>
+                                        <th>Location</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="units-table-body">
+                                    <!-- Sample data for demo -->
+                                    <tr>
+                                        <td>U001</td>
+                                        <td>Alpha Squad</td>
+                                        <td><span class="status-badge in-progress">In Progress</span></td>
+                                        <td>Woodland Recon</td>
+                                        <td>Grid A-12</td>
+                                        <td>
+                                            <button class="action-btn">View Details</button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>U002</td>
+                                        <td>Bravo Team</td>
+                                        <td><span class="status-badge active">Active</span></td>
+                                        <td>Supply Run</td>
+                                        <td>Grid B-08</td>
+                                        <td>
+                                            <button class="action-btn">View Details</button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <!-- Table Footer Controls -->
+                        <div class="table-controls">
+                            <div class="filter-control">
+                                <select id="unit-filter-dropdown">
+                                    <option value="all">All Units</option>
+                                    <option value="active">Active Only</option>
+                                    <option value="in-progress">In Progress</option>
+                                    <option value="maintenance">Maintenance</option>
+                                </select>
+                            </div>
+                            <div class="sort-control">
+                                <select id="unit-sort-dropdown">
+                                    <option value="id">Sort by ID</option>
+                                    <option value="name">Sort by Name</option>
+                                    <option value="status">Sort by Status</option>
+                                </select>
+                            </div>
+                            <button class="btn-create">ADD NEW UNIT</button>
+                        </div>
+                    </div>
+
+                    <div class="tab-content" id="unit-status">
+                        <div class="status-overview">
+                            <div class="status-card">
+                                <h3>Unit Status Overview</h3>
+                                <div class="status-stats">
+                                    <div class="stat-item">
+                                        <span class="stat-value">12</span>
+                                        <span class="stat-label">Active Units</span>
+                                    </div>
+                                    <div class="stat-item">
+                                        <span class="stat-value">5</span>
+                                        <span class="stat-label">In Progress</span>
+                                    </div>
+                                    <div class="stat-item">
+                                        <span class="stat-value">3</span>
+                                        <span class="stat-label">Maintenance</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Status Distribution Chart -->
+                            <div class="status-card">
+                                <h3>Status Distribution</h3>
+                                <div class="status-chart">
+                                    <div class="chart-container">
+                                        <div class="chart-bar-container">
+                                            <div class="chart-label">Active</div>
+                                            <div class="chart-bar">
+                                                <div class="chart-bar-fill active" id="active-bar"></div>
+                                            </div>
+                                            <div class="chart-value" id="active-percent">0%</div>
+                                        </div>
+                                        <div class="chart-bar-container">
+                                            <div class="chart-label">In Progress</div>
+                                            <div class="chart-bar">
+                                                <div class="chart-bar-fill in-progress" id="in-progress-bar"></div>
+                                            </div>
+                                            <div class="chart-value" id="in-progress-percent">0%</div>
+                                        </div>
+                                        <div class="chart-bar-container">
+                                            <div class="chart-label">Maintenance</div>
+                                            <div class="chart-bar">
+                                                <div class="chart-bar-fill maintenance" id="maintenance-bar"></div>
+                                            </div>
+                                            <div class="chart-value" id="maintenance-percent">0%</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Units By Status -->
+                            <div class="status-card">
+                                <h3>Units By Status</h3>
+                                <div class="status-tabs">
+                                    <button class="status-tab active" data-status="all">All</button>
+                                    <button class="status-tab" data-status="active">Active</button>
+                                    <button class="status-tab" data-status="in-progress">In Progress</button>
+                                    <button class="status-tab" data-status="maintenance">Maintenance</button>
+                                </div>
+                                <div class="status-units-list" id="status-units-list">
+                                    <!-- Units will be populated by JavaScript -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tab-content" id="unit-history">
+                        <div class="history-container">
+                            <h3>Unit History</h3>
+                            <div class="unit-history-filter">
+                                <select id="history-unit-filter">
+                                    <option value="all">All Units</option>
+                                    <!-- Unit options will be populated by JavaScript -->
+                                </select>
+                            </div>
+                            <div class="history-timeline" id="history-timeline">
+                                <!-- History items will be populated by JavaScript -->
+                                <div class="empty-message">Select a unit to view its mission history</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Unit Add Modal -->
+    <div id="unit-add-modal" class="mission-edit-modal">
+        <div class="mission-edit-content">
+            <div class="modal-header">
+                <h3>Add New Unit</h3>
+                <button id="close-unit-modal" class="close-modal">Close</button>
+            </div>
+            <div class="modal-body">
+                <form id="add-unit-form">
+                    <div class="form-group">
+                        <label for="new-unit-id">Unit ID</label>
+                        <input type="text" id="new-unit-id" class="form-control" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="new-unit-name">Unit Name</label>
+                        <input type="text" id="new-unit-name" class="form-control" required>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group half">
+                            <label for="new-unit-status">Status</label>
+                            <select id="new-unit-status" class="form-control">
+                                <option value="Active">Active</option>
+                                <option value="In Progress">In Progress</option>
+                                <option value="Maintenance">Maintenance</option>
+                            </select>
+                        </div>
+                        <div class="form-group half">
+                            <label for="new-unit-mission">Current Mission</label>
+                            <input type="text" id="new-unit-mission" class="form-control">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="new-unit-location">Location</label>
+                        <input type="text" id="new-unit-location" class="form-control">
+                    </div>
+                    
+                    <div class="form-actions">
+                        <button type="button" class="btn-cancel" id="cancel-add-unit">Cancel</button>
+                        <button type="submit" class="btn-save">Add Unit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="units.js"></script>
+    <script src="user-profile.js"></script>
+</body>
+</html>

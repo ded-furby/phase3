@@ -1,0 +1,283 @@
+/* Real-Time Tracking Styles - Inverted Theme */
+
+/* Use Inter font for all text */
+* {
+    font-family: 'Inter', sans-serif;
+}
+
+/* Sidebar active link styling with pink highlight */
+.tracking-active {
+    border-left-color: #ff69b4 !important;
+}
+
+/* Topbar styling */
+.logo-circle {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #1a1a1a;
+    border: 2px solid var(--accent-color);
+}
+
+.page-title {
+    font-size: 1.3rem;
+    font-weight: 700;
+    text-align: center;
+    letter-spacing: 1px;
+    background-color: #1a1a1a;
+    padding: 8px 16px;
+    border-radius: 4px;
+}
+
+/* Filter Section */
+.filter-section {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    background-color: var(--sidebar-bg);
+    padding: 15px 20px;
+    border-radius: 6px;
+    box-shadow: 0 2px 8px var(--shadow-color);
+}
+
+.filter-badge {
+    font-weight: 600;
+    font-size: 14px;
+    padding: 4px 10px;
+    background-color: rgba(100, 181, 246, 0.2);
+    border-radius: 4px;
+    color: #64b5f6;
+    margin-right: 15px;
+}
+
+.filter-controls {
+    display: flex;
+    flex: 1;
+    gap: 10px;
+}
+
+.mission-filter {
+    flex: 1;
+    padding: 8px 12px;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    background-color: var(--input-bg);
+    color: var(--text-color);
+    font-size: 14px;
+}
+
+.btn-go {
+    padding: 8px 20px;
+    background-color: #64b5f6;
+    color: #000000;
+    border: none;
+    border-radius: 4px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn-go:hover {
+    background-color: #90caf9;
+}
+
+/* Tracking Visualization */
+.tracking-visualization {
+    margin-bottom: 20px;
+}
+
+.tracking-map {
+    position: relative;
+    width: 100%;
+    height: 500px;
+    background-color: var(--input-bg);
+    border-radius: 6px;
+    overflow: hidden;
+    border: 1px solid var(--border-color);
+}
+
+.map-grid {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.grid-line {
+    position: absolute;
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+.grid-line.horizontal {
+    width: 100%;
+    height: 1px;
+}
+
+.grid-line.vertical {
+    height: 100%;
+    width: 1px;
+}
+
+.tracking-routes {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+}
+
+.route {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+.route-line {
+    position: absolute;
+    height: 3px;
+    background-color: rgba(100, 181, 246, 0.7);
+    transform-origin: left center;
+    z-index: 1;
+}
+
+.route-point {
+    position: absolute;
+    width: 14px;
+    height: 14px;
+    background-color: #64b5f6;
+    border: 2px solid #ffffff;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 7px;
+    color: #000000;
+    font-weight: bold;
+}
+
+.route-point.active {
+    background-color: #ff69b4;
+    box-shadow: 0 0 0 4px rgba(255, 105, 180, 0.3);
+    width: 18px;
+    height: 18px;
+    animation: pulse 2s infinite;
+    z-index: 3;
+}
+
+.empty-message {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: var(--inactive-color);
+    font-size: 16px;
+    text-align: center;
+}
+
+/* Control Buttons */
+.tracking-controls {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+.control-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 20px;
+    background-color: rgba(100, 181, 246, 0.2);
+    color: #64b5f6;
+    border: none;
+    border-radius: 20px;
+    font-weight: 600;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.control-btn:hover {
+    background-color: rgba(100, 181, 246, 0.3);
+}
+
+.control-btn svg {
+    stroke: #64b5f6;
+}
+
+/* Pulse Animation for Active Points */
+@keyframes pulse {
+    0% {
+        box-shadow: 0 0 0 0 rgba(255, 105, 180, 0.7);
+    }
+    70% {
+        box-shadow: 0 0 0 6px rgba(255, 105, 180, 0);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(255, 105, 180, 0);
+    }
+}
+
+/* Add refresh animation and styling */
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.control-btn.refreshing svg {
+    animation: spin 1s linear infinite;
+}
+
+.control-btn.success {
+    background-color: rgba(100, 181, 246, 0.4);
+}
+
+/* Responsive Styles */
+@media (max-width: 992px) {
+    .filter-section {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+    
+    .filter-badge {
+        margin-bottom: 5px;
+    }
+    
+    .tracking-map {
+        height: 400px;
+    }
+}
+
+@media (max-width: 768px) {
+    .page-title {
+        font-size: 1rem;
+    }
+    
+    .tracking-map {
+        height: 350px;
+    }
+    
+    .tracking-controls {
+        flex-wrap: wrap;
+    }
+    
+    .control-btn {
+        flex: 1;
+        min-width: 120px;
+        justify-content: center;
+    }
+}
+
+@media (max-width: 576px) {
+    .filter-controls {
+        flex-direction: column;
+    }
+    
+    .tracking-map {
+        height: 300px;
+    }
+} 

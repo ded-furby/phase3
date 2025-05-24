@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Sign Up - CJCS</title>
+  <link rel="stylesheet" href="signup.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="signup-wrapper">
+    <!-- Left Side - Background Image -->
+    <div class="signup-left">
+      <div class="background-image"></div>
+      <div class="overlay-content">
+        <h2>Welcome to CJCS</h2>
+        <p>Chicken Jockey Coordination System</p>
+        <div class="feature-list">
+          <div class="feature-item">🎯 Mission Planning</div>
+          <div class="feature-item">👥 Unit Coordination</div>
+          <div class="feature-item">📊 Real-time Tracking</div>
+          <div class="feature-item">💬 Secure Communications</div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Right Side - Signup Form -->
+    <div class="signup-right">
+      <section class="signup-card">
+        <img src="logo.png" alt="CJCS Logo" class="cjcs-logo" />
+        <h1 class="signup-title">Sign Up</h1>
+
+        <form id="signup-form">
+          <div class="input-group">
+            <label for="username">Username</label>
+            <input type="text" id="username" name="username" required placeholder="Choose a username">
+          </div>
+          <div class="input-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" required placeholder="Enter your email">
+          </div>
+          <div class="input-group">
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" required placeholder="Create a password">
+          </div>
+          <div class="input-group">
+            <label for="confirm-password">Confirm Password</label>
+            <input type="password" id="confirm-password" name="confirm-password" required placeholder="Confirm your password">
+          </div>
+
+          <button type="submit" class="btn-primary">Create Account</button>
+          <button type="button" id="direct-register" class="btn-outline">Register Directly (No Server)</button>
+        </form>
+
+        <div class="login-link">
+          Already have an account? <a href="login.html">Login</a>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <script src="auth.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const signupForm = document.getElementById('signup-form');
+      const directRegisterBtn = document.getElementById('direct-register');
+
+      // FORM SUBMIT HANDLER
+      signupForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+
+        const username = document.getElementById('username').value.trim();
+        const email = document.getElementById('email').value.trim();
+        const password = document.getElementById('password').value.trim();
+        const confirmPassword = document.getElementById('confirm-password').value.trim();
+
+        if (!username || !email || !password || !confirmPassword) {
+          alert('Please fill in all fields');
+          return;
+        }
+
+        if (password !== confirmPassword) {
+          alert('Passwords do not match');
+          return;
+        }
+        
+        // Create new user
+        const newUser = {
+          username,
+          password,
+          email,
+          role: 'user',
+          created_at: new Date().toISOString()
+        };
+        
+        try {
+          // Save to localStorage
+          let users = { users: [] };
+          const existing = localStorage.getItem('users');
+          
+          if (existing) {
+            users = JSON.parse(existing);
+            if (users.users.some(u => u.username === username)) {
+              alert('Username already exists');
+              return;
+            }
+            users.users.push(newUser);
+          } else {
+            users.users = [
+              {
+                username: "admin",
+                password: "admin123",
+                email: "admin@chickenjockey.com",
+                role: "admin",
+                created_at: "2023-01-01T00:00:00Z"
+              },
+              newUser
+            ];
+          }
+          
+          localStorage.setItem('users', JSON.stringify(users));
+          console.log('User saved to localStorage:', newUser);
+          
+          // Simulate success
+          alert('Account created successfully! Redirecting to login...');
+          setTimeout(() => {
+            window.location.href = 'login.html';
+          }, 1000);
+        } catch (error) {
+          console.error('Registration error:', error);
+          alert('Registration failed. Please try again.');
+        }
+      });
+
+      // CLIENT-SIDE REGISTER
+      if (directRegisterBtn) {
+        directRegisterBtn.addEventListener('click', () => {
+          const username = document.getElementById('username').value.trim();
+          const email = document.getElementById('email').value.trim();
+          const password = document.getElementById('password').value.trim();
+          const confirmPassword = document.getElementById('confirm-password').value.trim();
+
+          if (!username || !email || !password || !confirmPassword) {
+            alert('Please fill in all fields');
+            return;
+          }
+
+          if (password !== confirmPassword) {
+            alert('Passwords do not match');
+            return;
+          }
+
+          const newUser = {
+            username,
+            password,
+            email,
+            role: 'user',
+            created_at: new Date().toISOString()
+          };
+
+          try {
+            let users = { users: [] };
+            const existing = localStorage.getItem('users');
+            if (existing) {
+              users = JSON.parse(existing);
+              if (users.users.some(u => u.username === username)) {
+                alert('Username already exists');
+                return;
+              }
+              users.users.push(newUser);
+            } else {
+              users.users = [
+                {
+                  username: "admin",
+                  password: "admin123",
+                  email: "admin@chickenjockey.com",
+                  role: "admin",
+                  created_at: "2023-01-01T00:00:00Z"
+                },
+                newUser
+              ];
+            }
+
+            localStorage.setItem('users', JSON.stringify(users));
+            sessionStorage.setItem('currentUser', JSON.stringify({
+              username: newUser.username,
+              email: newUser.email,
+              role: newUser.role
+            }));
+
+            alert('Account created successfully! Redirecting to login...');
+            setTimeout(() => {
+              window.location.href = 'login.html';
+            }, 1000);
+          } catch (error) {
+            console.error('Direct registration error:', error);
+            alert('Registration failed. Please try again.');
+          }
+        });
+      }
+    });
+  </script>
+</body>
+</html>

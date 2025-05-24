@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Real-Time Tracking - Chicken Jockey Coordination System</title>
+    <link rel="stylesheet" href="dashboard.css">
+    <link rel="stylesheet" href="themes.css">
+    <link rel="stylesheet" href="tracking.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="theme-loader.js"></script>
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="logo">
+                <img src="logo.png" alt="CJCS Logo">
+            </div>
+            <nav class="sidebar-nav">
+                <button class="nav-item">MISSIONS</button>
+                <button class="nav-item">UNITS</button>
+                <button class="nav-item tracking-nav active">TRACKING</button>
+                <button class="nav-item comms-nav">COMMS</button>
+                <button class="nav-item">REPORTS</button>
+                <button class="nav-item">SETTINGS</button>
+            </nav>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+            <!-- Top Bar -->
+            <header class="topbar">
+                <h1 class="page-title">REAL-TIME TRACKING</h1>
+                <div class="user-profile" id="user-profile">
+                    <span id="username-display" class="hidden-mobile">USER</span>
+                    <div class="user-icon">
+                        <svg viewBox="0 0 24 24" width="24" height="24">
+                            <circle cx="12" cy="8" r="4" fill="currentColor"/>
+                            <path d="M4 20c0-4.4 3.6-8 8-8s8 3.6 8 8" fill="currentColor"/>
+                        </svg>
+                    </div>
+                    
+                    <!-- User Profile Dropdown -->
+                    <div class="user-dropdown" id="user-dropdown">
+                        <div class="user-dropdown-header">
+                            <h3 id="user-fullname">User Profile</h3>
+                            <p id="user-role">Role: User</p>
+                        </div>
+                        <div class="user-dropdown-content">
+                            <div class="user-info-item">
+                                <div class="user-info-label">Username:</div>
+                                <div class="user-info-value" id="dropdown-username"></div>
+                            </div>
+                            <div class="user-info-item">
+                                <div class="user-info-label">Email:</div>
+                                <div class="user-info-value" id="dropdown-email"></div>
+                            </div>
+                        </div>
+                        <div class="user-dropdown-footer">
+                            <button class="logout-btn" id="logout-btn"><div class="logo" style="background-color: #ff69b4;">
+                                <img src="logo.png" alt="CJCS Logo">
+                            </div>Logout</button>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Tracking Content -->
+            <section class="content-section">
+                <!-- Filter Section -->
+                <div class="filter-section">
+                    <div class="filter-badge">FILTER BY:</div>
+                    <div class="filter-controls">
+                        <select id="mission-filter" class="mission-filter">
+                            <option value="all">ALL MISSIONS</option>
+                            <!-- Will be populated dynamically -->
+                        </select>
+                        <button id="filter-go" class="btn-go">GO</button>
+                    </div>
+                </div>
+
+                <!-- Tracking Visualization -->
+                <div class="tracking-visualization">
+                    <div class="tracking-map" id="tracking-map">
+                        <!-- Map grid -->
+                        <div class="map-grid">
+                            <!-- Horizontal grid lines -->
+                            <div class="grid-line horizontal" style="top: 10%"></div>
+                            <div class="grid-line horizontal" style="top: 20%"></div>
+                            <div class="grid-line horizontal" style="top: 30%"></div>
+                            <div class="grid-line horizontal" style="top: 40%"></div>
+                            <div class="grid-line horizontal" style="top: 50%"></div>
+                            <div class="grid-line horizontal" style="top: 60%"></div>
+                            <div class="grid-line horizontal" style="top: 70%"></div>
+                            <div class="grid-line horizontal" style="top: 80%"></div>
+                            <div class="grid-line horizontal" style="top: 90%"></div>
+                            
+                            <!-- Vertical grid lines -->
+                            <div class="grid-line vertical" style="left: 10%"></div>
+                            <div class="grid-line vertical" style="left: 20%"></div>
+                            <div class="grid-line vertical" style="left: 30%"></div>
+                            <div class="grid-line vertical" style="left: 40%"></div>
+                            <div class="grid-line vertical" style="left: 50%"></div>
+                            <div class="grid-line vertical" style="left: 60%"></div>
+                            <div class="grid-line vertical" style="left: 70%"></div>
+                            <div class="grid-line vertical" style="left: 80%"></div>
+                            <div class="grid-line vertical" style="left: 90%"></div>
+                        </div>
+                        
+                        <!-- Routes will be rendered here -->
+                        <div id="tracking-routes" class="tracking-routes"></div>
+                        
+                        <!-- Empty state message -->
+                        <div id="empty-message" class="empty-message">
+                            Select a mission to view tracking data
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Control Buttons -->
+                <div class="tracking-controls">
+                    <button id="zoom-in" class="control-btn">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 4V20M4 12H20" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                        </svg>
+                        ZOOM IN
+                    </button>
+                    <button id="zoom-out" class="control-btn">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M4 12H20" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                        </svg>
+                        ZOOM OUT
+                    </button>
+                    <button id="refresh" class="control-btn">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M20 11C19.7554 9.24017 18.9391 7.60959 17.6766 6.35941C16.4142 5.10922 14.7758 4.30887 13.0137 4.08115C11.2516 3.85343 9.46362 4.21213 7.9252 5.10181C6.38678 5.9915 5.18325 7.36981 4.5 9.00001M4 5.00001V9.00001H8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M4 13C4.24456 14.7598 5.06093 16.3904 6.32338 17.6406C7.58583 18.8908 9.22424 19.6911 10.9863 19.9189C12.7484 20.1466 14.5364 19.7879 16.0748 18.8982C17.6132 18.0085 18.8168 16.6302 19.5 15M20 19V15H16" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        REFRESH
+                    </button>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="tracking.js"></script>
+    <script src="user-profile.js"></script>
+</body>
+</html>

@@ -1,0 +1,39 @@
+{
+  "users": [
+    {
+      "username": "admin",
+      "password": "admin123",
+      "email": "admin@chickenjockey.com",
+      "role": "admin",
+      "created_at": "2023-01-01T00:00:00Z"
+    },
+    {
+      "username": "commander",
+      "password": "command123",
+      "email": "commander@chickenjockey.com",
+      "role": "commander",
+      "created_at": "2023-01-02T00:00:00Z"
+    },
+    {
+      "username": "rue",
+      "password": "123",
+      "email": "bhasmerutika@gmail.com",
+      "role": "user",
+      "created_at": "2025-05-13T11:07:20.854Z"
+    },
+    {
+      "username": "sr chef",
+      "password": "123",
+      "email": "bhasmerutika@gmail.com",
+      "role": "user",
+      "created_at": "2025-05-13T11:08:07.141Z"
+    },
+    {
+      "username": "furry",
+      "password": "123123",
+      "email": "arjunavtani@gmail.com",
+      "role": "user",
+      "created_at": "2025-05-13T12:24:25.893Z"
+    }
+  ]
+}

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Page - Chicken Jockey Coordination System</title>
+    <link rel="stylesheet" href="dashboard.css">
+    <link rel="stylesheet" href="themes.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="logo">CJCS</div>
+            <nav class="sidebar-nav">
+                <button class="nav-item">MISSIONS</button>
+                <button class="nav-item">UNITS</button>
+                <button class="nav-item tracking-nav">TRACKING</button>
+                <button class="nav-item comms-nav">COMMS</button>
+                <button class="nav-item">REPORTS</button>
+                <button class="nav-item" id="settings-link">SETTINGS</button>
+            </nav>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+            <!-- Top Bar -->
+            <header class="topbar">
+                <h1 class="app-title">TEST PAGE</h1>
+                <div class="user-profile" id="user-profile">
+                    <span id="username-display">USER</span>
+                    <div class="user-icon">
+                        <svg viewBox="0 0 24 24" width="24" height="24">
+                            <circle cx="12" cy="8" r="4" fill="currentColor"/>
+                            <path d="M4 20c0-4.4 3.6-8 8-8s8 3.6 8 8" fill="currentColor"/>
+                        </svg>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Content Section -->
+            <section class="content-section">
+                <div class="section-header">
+                    <h2>THEME TEST</h2>
+                </div>
+
+                <div class="table-container">
+                    <p style="padding: 20px;">This page demonstrates that the theme settings are applied correctly across the site.</p>
+                    <p style="padding: 20px;">The theme should only change when you explicitly save changes in the settings page.</p>
+                </div>
+                
+                <div class="table-container" style="margin-top: 20px;">
+                    <h3 style="padding: 20px;">Theme Elements</h3>
+                    <div style="padding: 20px;">
+                        <p>Text color and background</p>
+                        <button class="btn-action" style="margin: 10px 0;">Action Button</button>
+                        <div style="margin: 10px 0;">
+                            <span class="status-active">Active Status</span>
+                        </div>
+                        <div style="margin: 10px 0;">
+                            <span class="status-pending">Pending Status</span>
+                        </div>
+                        <div style="margin: 10px 0;">
+                            <span class="status-completed">Completed Status</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+    <script src="theme-loader.js"></script>
+    <script>
+        // Add navigation to settings page
+        document.getElementById('settings-link').addEventListener('click', function() {
+            window.location.href = 'settings.html';
+        });
+    </script>
+</body>
+</html> 

@@ -1,0 +1,345 @@
+/* ───────────────────────────────
+   Settings-page overrides & polish
+   ─────────────────────────────── */
+
+/* 1. NAVIGATION TABS (General | Notifications | …) */
+.settings-nav {
+  display: flex;
+  gap: 10px;
+  margin: 0 0 25px 0;
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 2px;
+}
+
+.settings-nav-item {
+  padding: 12px 24px;
+  font-weight: 600;
+  background: none;
+  border: none;
+  color: var(--inactive-color);
+  position: relative;
+  transition: color 0.25s, background-color 0.25s;
+  border-radius: 4px 4px 0 0;
+}
+
+.settings-nav-item:hover {
+  color: var(--active-color);
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+.settings-nav-item.active {
+  color: var(--active-color);
+  background-color: rgba(255, 255, 255, 0.08);
+}
+
+.settings-nav-item.active::after,
+.settings-nav-item:hover::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -3px;
+  height: 3px;
+  width: 100%;
+  background: var(--active-color);
+  border-radius: 2px;
+}
+
+/* 2. PANEL SWITCHING (hide/show by JS) */
+.settings-panel { 
+  display: none; 
+  background-color: var(--sidebar-bg);
+  border-radius: 8px;
+  padding: 24px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  margin-bottom: 20px;
+  transition: all 0.3s ease;
+}
+
+.settings-panel.active { 
+  display: block; 
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.settings-panel h3 {
+  margin: 0 0 24px 0;
+  font-size: 1.3rem;
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 12px;
+  color: var(--active-color);
+  font-weight: 600;
+}
+
+.settings-description {
+  margin: -16px 0 24px 0;
+  color: var(--inactive-color);
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+/* 3. FORM LAYOUT */
+.settings-group {
+  display: grid;
+  gap: 24px;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+}
+
+.setting-item { 
+  display: flex; 
+  flex-direction: column; 
+  gap: 10px; 
+  background-color: rgba(0, 0, 0, 0.15);
+  padding: 16px;
+  border-radius: 6px;
+  border: 1px solid var(--border-color);
+  transition: border-color 0.3s;
+}
+
+.setting-item:hover {
+  border-color: var(--accent-color);
+}
+
+.setting-item.hover {
+  border-color: var(--accent-color);
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+.setting-item label {
+  font-weight: 500;
+  font-size: 15px;
+  color: var(--text-color);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.setting-help {
+  font-size: 12px;
+  color: var(--inactive-color);
+  margin-top: 2px;
+}
+
+.settings-input,
+.settings-panel select,
+.settings-panel input[type="text"],
+.settings-panel input[type="number"] {
+  padding: 12px 14px;
+  background: var(--input-bg);
+  color: var(--text-color);
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  font-size: 14px;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.settings-input:focus,
+.settings-panel select:focus,
+.settings-panel input[type="text"]:focus,
+.settings-panel input[type="number"]:focus {
+  border-color: var(--tracking-color);
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(255, 105, 180, 0.2);
+}
+
+/* 4. TOGGLE SWITCHES */
+.toggle-switch {
+  position: relative;
+  width: 52px;
+  height: 26px;
+}
+
+.toggle-switch input { opacity: 0; width: 0; height: 0; }
+
+.toggle-switch label {
+  position: absolute;
+  top: 0; left: 0;
+  right: 0; bottom: 0;
+  background: var(--inactive-color);
+  border-radius: 30px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.toggle-switch label::before {
+  content: '';
+  position: absolute;
+  left: 3px; top: 3px;
+  width: 20px; height: 20px;
+  background: var(--bg-color);
+  border-radius: 50%;
+  transition: transform 0.3s, box-shadow 0.3s;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+.toggle-switch input:checked + label { background: var(--tracking-color); }
+.toggle-switch input:checked + label::before { 
+  transform: translateX(26px);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+.toggle-switch:hover label::before {
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.5);
+}
+
+/* 5. SAVE BUTTON */
+.settings-actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 30px;
+  gap: 16px;
+}
+
+.btn-save {
+  padding: 14px 36px;
+  background: var(--active-color);
+  color: var(--bg-color);
+  border: none;
+  border-radius: 4px;
+  font-weight: 700;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.3s;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-save:hover { 
+  opacity: 0.9;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.btn-save:active {
+  transform: translateY(0);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+.btn-save.saving {
+  background-color: #666;
+  cursor: wait;
+}
+
+.btn-save.saved {
+  background-color: #4CAF50;
+}
+
+.btn-cancel {
+  padding: 14px 36px;
+  background: transparent;
+  color: var(--text-color);
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  font-weight: 600;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.btn-cancel:hover {
+  background-color: rgba(255, 255, 255, 0.05);
+  border-color: var(--accent-color);
+}
+
+/* 6. RESPONSIVE TWEAKS */
+@media (max-width: 768px) {
+  .settings-group { grid-template-columns: 1fr; }
+  .settings-nav { flex-wrap: wrap; }
+  .settings-nav-item { flex: 1 1 auto; text-align: center; padding: 10px 12px; }
+  .settings-panel { padding: 16px; }
+}
+
+/* 7. SETTING CATEGORIES */
+.setting-category {
+  margin-bottom: 24px;
+}
+
+.setting-category h4 {
+  font-size: 16px;
+  margin-bottom: 16px;
+  color: var(--accent-color);
+  border-bottom: 1px dashed var(--border-color);
+  padding-bottom: 8px;
+}
+
+/* 8. TOAST NOTIFICATIONS */
+.toast-container {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  pointer-events: none;
+}
+
+.toast {
+  background-color: rgba(0, 0, 0, 0.8);
+  color: white;
+  padding: 12px 20px;
+  border-radius: 4px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  font-size: 14px;
+  font-weight: 500;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.3s, transform 0.3s;
+  max-width: 300px;
+  pointer-events: auto;
+  border-left: 4px solid var(--tracking-color);
+}
+
+.toast.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Read-only inputs */
+input[readonly] {
+  background-color: rgba(0, 0, 0, 0.2);
+  cursor: not-allowed;
+  color: var(--inactive-color);
+}
+
+/* System Name Preview Styling */
+.system-name-preview {
+  margin-top: 15px;
+  padding: 12px;
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  background-color: var(--card-bg-alt);
+}
+
+.preview-label {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  margin-bottom: 8px;
+}
+
+.preview-content {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.preview-logo {
+  background-color: var(--accent-color);
+  color: white;
+  font-weight: bold;
+  padding: 8px 12px;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  min-width: 50px;
+  text-align: center;
+}
+
+.preview-title {
+  font-weight: 600;
+  color: var(--text-primary);
+  font-size: 0.9rem;
+}
